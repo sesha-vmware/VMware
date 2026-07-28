@@ -1,7 +1,19 @@
 
 VSAN
 
-All the physical server storages are combined and configured together to preapre a VSAN ( Raw disks are mounted)
-To configure Raid 5 and Raid 6 requires a flash SSD 
+All the physical ESXi server storages are combined and configured together for a VSAN ( Raw disks are mounted)
+To configure Raid 5 and Raid 6 in VSAN requires a flash SSD 
 Single SSD which acts as a cache for repeated operations (read/write) is used for read and write opearation for and the remaing HDD
 acts as read and wrtie for general operations. 
+
+
+Default Storage polices:
+
+PFFT = 1 (Primary Failures To Tolerate) #The VM can survive one host, disk group, or disk failure depending on the failure domain configuration. Typically implemented as RAID-1 mirroring in a 3-node cluster)
+Stripe Width = 1 # Data is stored as a single stripe. No additional striping is requested for performance optimization. This is the default and recommended setting in most environments)
+Flash Read Cache Reservation = 0 #No dedicated flash cache is reserved for this VM. The VM uses the shared cache pool dynamically)
+Object Space Reservaton = 0 # Thin provisioning. Storage space is consumed only as data is written, rather than reserving the entire VMDK size upfront
+Force Provisioning = No # vSAN will not create the object if policy requirements cannot be met. It prevents non-compliant VM provisioning
+
+
+
