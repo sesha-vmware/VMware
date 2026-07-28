@@ -1,0 +1,7 @@
+
+VSAN
+
+All the physical server storages are combined and configured together to preapre a VSAN ( Raw disks are mounted)
+To configure Raid 5 and Raid 6 requires a flash SSD 
+Single SSD which acts as a cache for repeated operations (read/write) is used for read and write opearation for and the remaing HDD
+acts as read and wrtie for general operations. 
