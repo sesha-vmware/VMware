@@ -16,4 +16,13 @@ Object Space Reservaton = 0 # Thin provisioning. Storage space is consumed only 
 Force Provisioning = No # vSAN will not create the object if policy requirements cannot be met. It prevents non-compliant VM provisioning
 
 
+Three fault domains are required to tolerate equal one, # It is recommanded to atleast maintain one extra spare fault doamin in case of failure when there is failure happened and unable to bring the rack online
+Five fault domains are reqired to tolerate equal two # It is recommanded to atleast maintain one extra spare fault doamin in case of failure when there is failure happened and unable to bring the rack online
+
+
+VM disk will be placed under 2 replicas and 1 witness. 
+5-7 seconds to become the replica to be available. 
+VSAN waits for 60 mins to bring the fault ESXi or disk to come back, if it doesn't happen it will rebuilt the replicas in the other node
+
+Host failure: Components that are placed in the ESXi server will be marked as absent by VSAN - it will wait for 5-6 to bring the replica online and componenet rebuild will be kicked off after 60 minutes if the host doesn not come backup uo.
 
